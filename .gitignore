@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+tweets.csv
+
+.DS_Store

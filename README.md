@@ -18,7 +18,7 @@ Get your consumer key and consumer secret from Twitter by following these steps:
 
 ### Installing
 
-Install tweets-dl
+    pip install tweets-dl
 
 ### Running the script
 

@@ -1,14 +1,14 @@
-## tweet-downloader
+## tweets-dl
 
 Python script to download tweets for a given twitter handle or multiple twitter handles. It returns the tweets in csv format.
 
-### Prerequisites
+### Pre-requisites
 
 Requests library from Python
 
 ### Installing
 
-Install tweets-dl
+    pip install tweets-dl
 
 ### Running the Script
 
@@ -38,4 +38,4 @@ A word of caution if using the default key and secret; one might experience "rat
 
 ### License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Vaishali-Garg/tweet-downloader/blob/master/LICENSE) file for details

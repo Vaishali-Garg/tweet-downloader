@@ -4,8 +4,8 @@ import csv
 import sys
 import getopt
 
-consumer_key = None
-consumer_secret = None
+consumer_key = 'HklgApURPbl5tGHxBMwsVMij1'
+consumer_secret = 'PyGx2ZUnP28al3FIGBITxfUNtn4bDEsrNRgJm91IF0acf2osQQ'
 
 def usage():
     msg = '''tweet-dl --key <twitter_app_key> --secret <twitter_app_secret> [--csv <output_file>] screen_name1 screen_name2 ...
@@ -39,7 +39,7 @@ def get_args():
         else:
             usage()
 
-    if (consumer_key is None) or (consumer_secret is None) or (len(args) < 1):
+    if (len(args) < 1):
         usage()
 
 
@@ -64,7 +64,6 @@ def get_tweets(screen_name):
 
     search_url = '{}1.1/statuses/user_timeline.json'.format(base_url)
     search_resp = requests.get(search_url, headers=search_headers, params=search_params)
-
     alltweets = []
 
     new_tweets = search_resp.json()
@@ -77,19 +76,11 @@ def get_tweets(screen_name):
         new_tweets = search_resp.json()
         alltweets.extend(new_tweets)
         oldest = alltweets[-1]['id'] - 1
-    
+
     outtweets = [[tweet['user']['name'],tweet['user']['description'], tweet['user']['location'],\
 
                   tweet['created_at'], tweet['id_str'], tweet['text'].encode("utf-8"),\
-                  tweet['source'], tweet['in_reply_to_status_id_str'], tweet['in_reply_to_user_id_str'],\
-                  tweet['in_reply_to_screen_name'], tweet.get('quote_count', 0),\
-                  tweet.get('reply_count', 0), tweet.get('retweet_count', 0), tweet.get('favorite_count', 0),  tweet.get('retweeted',0),\
-
-                  tweet['user']['id_str'], tweet['user']['followers_count'], tweet['user']['friends_count'],\
-                  tweet['user']['favourites_count'], tweet['user']['statuses_count'],\
-                  tweet['user']['time_zone'], tweet['user']['lang'], tweet['user']['created_at'],\
-
-                  tweet.get('media', {}).get('display_url', None), tweet.get('media', {}).get('type', None)] \
+                  tweet['source'],  tweet.get('retweet_count', 0), tweet.get('favorite_count', 0)] \
                   for tweet in alltweets]
     return outtweets
 
@@ -109,13 +100,8 @@ def write_csv(tweet_list, output_file):
 
     with open(output_file, 'w') as f:
         writer = csv.writer(f)
-        writer.writerow(['user name' ,  'user description' ,   'user location' ,\
-        'created_at' ,   'id_str' ,   'text', 'source' ,   'in_reply_to_status_id_str' ,\
-        'in_reply_to_user_id_str' , 'in_reply_to_screen_name' ,  \
-        'quote_count' , 'reply_count' ,   'retweet_count' ,   'favorite_count' ,\
-        'retweeted' ,'user id' , 'followers_count' ,   'friends_count' ,'favourites_count',\
-        'statuses_count' ,'user time_zone' ,   'user lang' ,   'user created_at' ,\
-        'media display_url' ,   'media type' ])
+        writer.writerow(['Name' ,  'Description' ,   'Location' , 'Created at' ,
+        'Id', 'Text', 'Source' ,'Retweet count' ,   'Favorite count' ])
 
         writer.writerows(tweet_list)
 

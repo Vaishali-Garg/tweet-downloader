@@ -2,10 +2,6 @@
 
 Python script to download tweets for a given twitter handle or multiple twitter handles. It returns the tweets in csv format.
 
-### Pre-requisites
-
-Requests library from Python
-
 ### Installing
 
     pip install tweets-dl
